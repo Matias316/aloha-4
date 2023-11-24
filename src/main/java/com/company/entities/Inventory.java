@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class Inventory
         return ""; 
     }
 
-    public String listPackages(){
-        return packageAndDependencies.keySet().toString(); 
+    public List<String> listPackages(){
+        return new ArrayList<String>(packageAndDependencies.keySet()); 
     }
 
     public void addPackageDependency(List<String> packageDependencies, String packageName) {

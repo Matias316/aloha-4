@@ -1,13 +1,19 @@
 package command.impl;
+import java.util.List;
+
 import command.api.Command;
 import entities.Inventory;
+import utils.Responses;
+import utils.SupportedCommands;
 
 public class RemoveCommand implements Command {
 
     Inventory inventory;
+    String packageName;
 
-    public RemoveCommand(Inventory inventory){
-        this.inventory = inventory;
+    public RemoveCommand(List<String> arguments){
+        //this.inventory = inventory;
+        this.packageName = arguments.get(0);
     }
 
     /**
@@ -24,7 +30,12 @@ public class RemoveCommand implements Command {
      */
     @Override
     public void execute() {
-        this.inventory.removePackage("");
+        System.out.print(SupportedCommands.REMOVE_COMMAND + " " + this.packageName);
+
+        //TODO - Add logic to remove package
+        //this.inventory.removePackage("");
+        System.out.print(this.packageName + " " + Responses.SUCCESSFULLY_REMOVED);
+
     }
     
 }

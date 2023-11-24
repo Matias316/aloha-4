@@ -1,13 +1,19 @@
 package command.impl;
+import java.util.List;
+
 import command.api.Command;
 import entities.Inventory;
+import utils.Responses;
+import utils.SupportedCommands;
 
 public class InstallCommand implements Command {
 
     Inventory inventory;
+    String packageName;
 
-    public InstallCommand(Inventory inventory){
-        this.inventory = inventory;
+    public InstallCommand(List<String> arguments){
+        //this.inventory = inventory;
+        this.packageName = arguments.get(0);
     }
 
     /**
@@ -22,7 +28,11 @@ public class InstallCommand implements Command {
      */
     @Override
     public void execute() {
-        this.inventory.addPackage("");
+        //this.inventory.addPackage("");
+        System.out.print(SupportedCommands.INSTALL_COMMAND + " " + this.packageName);
+
+        //TODO - Add logic to add package
+        System.out.print(this.packageName + " " + Responses.SUCCESSFULLY_INSTALLED);
     }
     
 }

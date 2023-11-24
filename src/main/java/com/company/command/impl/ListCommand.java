@@ -1,13 +1,15 @@
 package command.impl;
+
 import command.api.Command;
 import entities.Inventory;
+import utils.SupportedCommands;
 
 public class ListCommand implements Command {
 
     Inventory inventory;
 
-    public ListCommand(Inventory inventory){
-        this.inventory = inventory;
+    public ListCommand(){
+        //this.inventory = inventory;
     }
 
     /**
@@ -16,7 +18,10 @@ public class ListCommand implements Command {
     */
     @Override
     public void execute() {
-        this.inventory.listPackages();
+        System.out.print(SupportedCommands.LIST_COMMAND);
+
+        //TODO - Add logic to list packages
+        //System.out.println(SupportedCommands.LIST_COMMAND + " " + this.inventory.listPackages().toString());
     }
     
 }

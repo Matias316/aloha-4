@@ -2,6 +2,7 @@ package command.impl;
 
 import command.api.Command;
 import entities.Inventory;
+import utils.SupportedCommands;
 
 public class EndCommand implements Command {
 
@@ -12,6 +13,8 @@ public class EndCommand implements Command {
 
     @Override
     public void execute() {
+        System.out.print(SupportedCommands.END_COMMAND);
+
     }
     
 }

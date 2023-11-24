@@ -1,21 +1,11 @@
 package utils;
 
-public enum Responses {
-        SUCCESSFULLY_REMOVED("successfully removed"),
-        SUCCESSFULLY_INSTALLED("successfully installed"),
-        ALREADY_INSTALLED("is already installed"),
-        ALREADY_REMOVED("is not installed"),
-        IN_USE("is still needed");
-    
-        private final String text;
-    
-        Responses(final String text) {
-            this.text = text;
-        }
-    
-        public String toString(){
-            return text;
-        }
+public class Responses {
+       public static final String SUCCESSFULLY_REMOVED = "successfully removed";
+        public static final String SUCCESSFULLY_INSTALLED = "successfully installed";
+        public static final String ALREADY_INSTALLED = "is already installed";
+        public static final String ALREADY_REMOVED = "is not installed";
+        public static final String IN_USE = "is still needed";
     
     
 }
