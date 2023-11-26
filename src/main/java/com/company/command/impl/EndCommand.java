@@ -13,7 +13,7 @@ public class EndCommand implements Command {
 
     @Override
     public void execute() {
-        System.out.print(SupportedCommands.END_COMMAND);
+        System.out.println(SupportedCommands.END_COMMAND);
 
     }
     

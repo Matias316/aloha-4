@@ -12,9 +12,9 @@ public class Console {
 
         Scanner input = new Scanner(System.in);        
         while (true) {
-            String commandLine = input.nextLine();
-            brokerCommand.executeCommand(commandLine);
-            if (commandLine.equals(SupportedCommands.END_COMMAND)) {
+            String inputCommand = input.nextLine();
+            brokerCommand.executeCommand(inputCommand);
+            if (inputCommand.equals(SupportedCommands.END_COMMAND)) {
                 break;
             }        
         }

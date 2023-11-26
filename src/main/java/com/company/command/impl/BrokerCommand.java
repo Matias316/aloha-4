@@ -5,54 +5,52 @@ import java.util.Arrays;
 import java.util.List;
 
 import command.api.Command;
+import entities.Inventory;
 import utils.SupportedCommands;
 
 public class BrokerCommand {
-    public void executeCommand(String commandLine) {
 
-        String[] inputCommandAndArguments = commandLine.split(" ");
+    Inventory inventory;
+
+    public BrokerCommand(){
+        this.inventory = Inventory.getInstance();
+    }
+
+    /**
+     * 
+     * @param inputCommand: expected format <command> <arguments> 
+     */
+    public void executeCommand(String inputCommand) {
+
+        List<String> inputCommandAndArgumentsList = new ArrayList<>(Arrays.asList(inputCommand.split(" ")));
         
-        String inputCommand = inputCommandAndArguments[0];
+        String command = inputCommandAndArgumentsList.get(0);
 
-        //Convert to list to easily manipulate
-        ArrayList<String> inputCommandAndArgumentsList = new ArrayList<String>(Arrays.asList(inputCommandAndArguments));
+        //Remove command and keep arguments (if any)
+        if (inputCommandAndArgumentsList.size() > 1) inputCommandAndArgumentsList.remove(0);
 
-        Command command = null;
-
-        switch (inputCommand) {
+        Command commandToExecute = null;
+        switch (command) {
             case SupportedCommands.INSTALL_COMMAND:
-                //Command and 1 argument are required for install command
-                if (inputCommandAndArgumentsList.size() == 2) {
-                    //Remove command and just pass arguments
-                    inputCommandAndArgumentsList.remove(0);
-                    command = new InstallCommand(inputCommandAndArgumentsList);            
-                }
+                commandToExecute = new InstallCommand(inputCommandAndArgumentsList, inventory);                           
                 break;
             case SupportedCommands.DEPEND_COMMAND:
-                //Command and at least 2 arguments are required for install command
-                if (inputCommandAndArgumentsList.size() > 2) {
-                    //Remove command and just pass arguments
-                    inputCommandAndArgumentsList.remove(0);
-                    command = new DependCommand(inputCommandAndArgumentsList);        
-                }      
+                commandToExecute = new DependCommand(inputCommandAndArgumentsList, inventory);        
                 break;
             case SupportedCommands.REMOVE_COMMAND:
-                //Command and 1 argument are required for remove command
-                if (inputCommandAndArgumentsList.size() == 2) {
-                    //Remove command and just pass arguments
-                    inputCommandAndArgumentsList.remove(0);
-                    command = new RemoveCommand(inputCommandAndArgumentsList);            
-                }
+                commandToExecute = new RemoveCommand(inputCommandAndArgumentsList, inventory);                            
                 break;
             case SupportedCommands.LIST_COMMAND:
-                command = new ListCommand();             
+                commandToExecute = new ListCommand(inventory);             
                 break;
             case SupportedCommands.END_COMMAND:
-                command = new EndCommand();              
+                commandToExecute = new EndCommand();              
                 break;
             default:                
                 break;
         }
-        if (command != null) command.execute();
+
+        //Ignore anything else different to the known commands
+        if (commandToExecute != null) commandToExecute.execute();
     }
 }

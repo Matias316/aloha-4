@@ -8,8 +8,8 @@ public class ListCommand implements Command {
 
     Inventory inventory;
 
-    public ListCommand(){
-        //this.inventory = inventory;
+    public ListCommand(Inventory inventory){
+        this.inventory = inventory;
     }
 
     /**
@@ -18,10 +18,7 @@ public class ListCommand implements Command {
     */
     @Override
     public void execute() {
-        System.out.print(SupportedCommands.LIST_COMMAND);
-
-        //TODO - Add logic to list packages
-        //System.out.println(SupportedCommands.LIST_COMMAND + " " + this.inventory.listPackages().toString());
+        System.out.println(SupportedCommands.LIST_COMMAND + " " + this.inventory.listPackages().toString());
     }
     
 }

@@ -11,8 +11,8 @@ public class RemoveCommand implements Command {
     Inventory inventory;
     String packageName;
 
-    public RemoveCommand(List<String> arguments){
-        //this.inventory = inventory;
+    public RemoveCommand(List<String> arguments, Inventory inventory){
+        this.inventory = inventory;
         this.packageName = arguments.get(0);
     }
 
@@ -30,12 +30,8 @@ public class RemoveCommand implements Command {
      */
     @Override
     public void execute() {
-        System.out.print(SupportedCommands.REMOVE_COMMAND + " " + this.packageName);
-
-        //TODO - Add logic to remove package
-        //this.inventory.removePackage("");
-        System.out.print(this.packageName + " " + Responses.SUCCESSFULLY_REMOVED);
-
+        System.out.print(SupportedCommands.REMOVE_COMMAND + " " + this.packageName + " ");
+        System.out.println(this.packageName + " " + this.inventory.removePackage(packageName));
     }
     
 }
