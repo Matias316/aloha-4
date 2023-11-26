@@ -30,7 +30,7 @@ public class RemoveCommand implements Command {
     @Override
     public void execute() {
         System.out.print(SupportedCommands.REMOVE_COMMAND + " " + this.packageName + " ");
-        System.out.println(this.packageName + " " + this.inventory.removePackage(packageName));
+        this.inventory.removePackage(packageName);
     }
     
 }

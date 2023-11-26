@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,24 +37,9 @@ public class DependencyTree {
 
         return packageNode;
     }
-    
-    /*
-    public void removePackage(String packageName) {
-        if (packageNodes.containsKey(packageName)) {
-            PackageNode pkgNode = packageNodes.get(packageName);
 
-            // Check if no other packages are using the dependencies
-            for (PackageNode dependencyNode : pkgNode.dependencies) {
-                dependencyNode.dependencies.remove(pkgNode);
-                if (dependencyNode.dependencies.isEmpty()) {
-                    packageNodes.remove(dependencyNode.packageName);
-                }
-            }
-
-            // Remove the package itself
-            packageNodes.remove(packageName);
-        }
+    public Collection<PackageNode> getAllNodes() {
+        return packageNodes.values();
     }
-    */
 
 }

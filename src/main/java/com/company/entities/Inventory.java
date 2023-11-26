@@ -59,22 +59,41 @@ public class Inventory
         }
     }
 
-    public String removePackage(String packageName){
-         String response = "";
+    public void removePackage(String packageName){
 
         //Node exists in dependency tree - obtain dependencies
+        Boolean dependencyIsNotUsed = true;
         if (dependenciesTree.getNode(packageName) != null) {
-            response = "Verify there are no parents node before removing";
-        } else {
-            //Package was not found in dependencies tree therefore it doesn't have dependencies
-            if (!installedPackages.contains(packageName)) {               
-                response = Responses.ALREADY_REMOVED;
+            dependencyIsNotUsed = verifyDependencyNotUsed(packageName);
+        }         
+        
+        //Package was not found in dependencies tree therefore it doesn't have dependencies
+        if (dependencyIsNotUsed) {
+            if (!installedPackages.contains(packageName)) {  
+                System.out.println(packageName + " " + Responses.ALREADY_REMOVED);             
             } else {
                 installedPackages.remove(packageName);
-                response = Responses.SUCCESSFULLY_REMOVED;
+                System.out.println(packageName + " " + Responses.SUCCESSFULLY_REMOVED);             
             }
+        } else {
+            System.out.println(packageName + " " + Responses.IN_USE);             
         }
-        return response;
+            
+    }
+
+    private boolean verifyDependencyNotUsed(String dependencyName) {
+        
+        boolean dependencyIsNotUsed = true;
+        //Probably this could be refactored by having a reference to parent node
+        for (PackageNode packageNode: dependenciesTree.getAllNodes()) {
+            //According to dependencies tree, this package uses this dependency - verify it's installed
+            for (PackageNode dependency: packageNode.dependencies)
+                if (dependency.packageName.equals(dependencyName) && installedPackages.contains(packageNode.packageName)) {
+                    dependencyIsNotUsed = false;
+                    break;
+                }
+        }
+        return dependencyIsNotUsed;
     }
 
     public String listPackages(){
