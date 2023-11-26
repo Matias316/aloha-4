@@ -1,9 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import utils.Responses;
 
 public class Inventory
@@ -11,6 +9,7 @@ public class Inventory
 
     private static Inventory inventoryInstance = null;    
     public DependencyTree dependenciesTree;
+    public PackageNode packageNode;
     public List<String> installedPackages;
 
     private Inventory() {
@@ -25,23 +24,39 @@ public class Inventory
         return inventoryInstance;
     }
  
-    public String addPackage(String packageName) {      
-        String response = "";
+    public void addPackage(String packageName) {      
+        //Package was already installed
+        if (installedPackages.contains(packageName)) {
+            System.out.println(packageName + " " + Responses.ALREADY_INSTALLED + " ");
+            return;
+        } 
 
-        //Node exists in dependency tree - obtain dependencies
-        if (dependenciesTree.getNode(packageName) != null) {
-            response = "Install dependencies from dependency tree";
-        } else {
-            //Package was not found in dependencies tree therefore it doesn't have dependencies
-            if (!installedPackages.contains(packageName)) {
-                installedPackages.add(packageName);
-                response = Responses.SUCCESSFULLY_INSTALLED;
-            } else {
-                response = Responses.ALREADY_INSTALLED;
-            }
-        }
+        packageNode = dependenciesTree.getNode(packageName);
+
+        //Node exists in dependency tree - obtain dependencies and install them if needed
+        if (packageNode != null) {
+            installDependencies(packageNode);
+        } 
         
-        return response; 
+        installedPackages.add(packageName);
+        System.out.println(packageName + " " + Responses.SUCCESSFULLY_INSTALLED + " ");
+    }
+
+    private void installDependencies(PackageNode packageNode) {
+        String dependencyName;
+        for (PackageNode dependency: packageNode.dependencies) {
+
+            dependencyName = dependency.packageName;
+            if (!installedPackages.contains(dependencyName)) {
+                installedPackages.add(dependencyName);
+                
+                System.out.print(dependencyName + " " + Responses.SUCCESSFULLY_INSTALLED + " ");
+            } else {
+                System.out.print(dependencyName + " " + Responses.ALREADY_INSTALLED + " ");
+            }   
+
+            installDependencies(dependency);
+        }
     }
 
     public String removePackage(String packageName){
@@ -70,7 +85,4 @@ public class Inventory
         dependenciesTree.addNode(packageName, packageDependencies);
     }
     
-
-    
-
 }

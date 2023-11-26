@@ -3,7 +3,6 @@ import java.util.List;
 
 import command.api.Command;
 import entities.Inventory;
-import utils.Responses;
 import utils.SupportedCommands;
 
 public class RemoveCommand implements Command {

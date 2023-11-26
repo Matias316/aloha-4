@@ -28,7 +28,7 @@ public class InstallCommand implements Command {
     @Override
     public void execute() {
         System.out.print(SupportedCommands.INSTALL_COMMAND + " " + this.packageName + " ");
-        System.out.println(this.packageName + " " + this.inventory.addPackage(this.packageName));
+        this.inventory.addPackage(this.packageName);
     }
     
 }
