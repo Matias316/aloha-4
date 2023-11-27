@@ -1,4 +1,4 @@
-# aloha-4
+# Package manager
 Technical interview exercise
 
 ## High Level requirements
