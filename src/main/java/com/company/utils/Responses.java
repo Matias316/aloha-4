@@ -1,4 +1,4 @@
-package utils;
+package com.company.utils;
 
 public class Responses {
        public static final String SUCCESSFULLY_REMOVED = "successfully removed";

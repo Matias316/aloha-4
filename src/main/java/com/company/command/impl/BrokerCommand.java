@@ -1,12 +1,12 @@
-package command.impl;
+package com.company.command.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import command.api.Command;
-import entities.Inventory;
-import utils.SupportedCommands;
+import com.company.command.api.Command;
+import com.company.entities.Inventory;
+import com.company.utils.SupportedCommands;
 
 public class BrokerCommand {
 

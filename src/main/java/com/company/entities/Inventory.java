@@ -1,8 +1,8 @@
-package entities;
+package com.company.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-import utils.Responses;
+import com.company.utils.Responses;
 
 public class Inventory
 {    

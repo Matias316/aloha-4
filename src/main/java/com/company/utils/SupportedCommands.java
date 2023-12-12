@@ -1,4 +1,4 @@
-package utils;
+package com.company.utils;
 
 public class SupportedCommands {
     public static final String REMOVE_COMMAND = "REMOVE";

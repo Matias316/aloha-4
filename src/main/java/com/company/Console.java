@@ -1,7 +1,8 @@
-import java.util.Scanner;
+package com.company;
 
-import command.impl.BrokerCommand;
-import utils.SupportedCommands;
+import java.util.Scanner;
+import com.company.command.impl.BrokerCommand;
+import com.company.utils.SupportedCommands;
 
 public class Console {
 
