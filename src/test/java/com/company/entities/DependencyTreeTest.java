@@ -1,22 +1,29 @@
-/* import static org.junit.Assert.*;  
+package com.company.entities;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.Test;  
-import com.company.entities.DependencyTree;
-import com.company.entities.PackageNode;
+
 
 public class DependencyTreeTest {
     
     private DependencyTree dependencyTree;
 
-    @Override
-	protected void setUp() throws Exception {
+    @Before
+	public void setUp() throws Exception {
 		dependencyTree = new DependencyTree();
 	}
 
     @Test  
     public void testValidateNodeIsAdded(){  
-        dependencyTree.addNode("TEST_PACKAGE", new ArrayList<String>("DEPENDENCY1","DEPENDENCY2"));
-        assertEquals("TEST_PACKAGE",dependencyTree.getNode("TEST_PACKAGE")));          
+        List<String> dependencyList = new ArrayList<String>(Arrays.asList("DEPENDENCY1","DEPENDENCY2"));
+        dependencyTree.addNode("TEST_PACKAGE", dependencyList );
+        assertEquals("TEST_PACKAGE",dependencyTree.getNode("TEST_PACKAGE").packageName);          
     }  
 
 }
- */
