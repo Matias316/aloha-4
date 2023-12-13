@@ -12,9 +12,8 @@ public class EndCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        System.out.println(SupportedCommands.END_COMMAND);
-
+    public String execute() {
+        return SupportedCommands.END_COMMAND;
     }
     
 }

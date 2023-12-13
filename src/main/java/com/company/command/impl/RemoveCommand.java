@@ -28,9 +28,11 @@ public class RemoveCommand implements Command {
      * <packageName> is not installed --> Package already removed
      */
     @Override
-    public void execute() {
-        System.out.print(SupportedCommands.REMOVE_COMMAND + " " + this.packageName + " ");
-        this.inventory.removePackage(packageName);
+    public String execute() {
+        String result = "";
+        result = SupportedCommands.REMOVE_COMMAND + " " + this.packageName + " ";
+        result.concat(this.inventory.removePackage(packageName));
+        return result;
     }
     
 }

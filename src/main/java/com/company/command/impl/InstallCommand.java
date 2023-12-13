@@ -26,9 +26,9 @@ public class InstallCommand implements Command {
      * <packageName> is already installed --> Package already installed
      */
     @Override
-    public void execute() {
-        System.out.print(SupportedCommands.INSTALL_COMMAND + " " + this.packageName + " ");
-        this.inventory.addPackage(this.packageName);
+    public String execute() {
+        String result = SupportedCommands.INSTALL_COMMAND + " " + this.packageName + " ";
+        return result.concat(this.inventory.addPackage(this.packageName));
     }
     
 }

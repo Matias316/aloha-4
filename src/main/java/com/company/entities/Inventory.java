@@ -13,7 +13,7 @@ public class Inventory
     public List<String> installedPackages;
 
     private Inventory() {
-        installedPackages = new ArrayList<>();
+        installedPackages = new ArrayList<String>();
         dependenciesTree = new DependencyTree();
     }
 
@@ -24,43 +24,46 @@ public class Inventory
         return inventoryInstance;
     }
  
-    public void addPackage(String packageName) {      
+    public String addPackage(String packageName) {      
+        String result = "";
+
         //Package was already installed
         if (installedPackages.contains(packageName)) {
-            System.out.println(packageName + " " + Responses.ALREADY_INSTALLED + " ");
-            return;
+            return result.concat(packageName + " " + Responses.ALREADY_INSTALLED + " ");            
         } 
 
         packageNode = dependenciesTree.getNode(packageName);
 
         //Node exists in dependency tree - obtain dependencies and install them if needed
         if (packageNode != null) {
-            installDependencies(packageNode);
+            result = installDependencies(packageNode, result);
         } 
         
         installedPackages.add(packageName);
-        System.out.println(packageName + " " + Responses.SUCCESSFULLY_INSTALLED + " ");
+        return result.concat(packageName + " " + Responses.SUCCESSFULLY_INSTALLED + " ");
     }
 
-    private void installDependencies(PackageNode packageNode) {
-        String dependencyName;
+    private String installDependencies(PackageNode packageNode, String result) {
+        String dependencyName;        
+
         for (PackageNode dependency: packageNode.dependencies) {
 
             dependencyName = dependency.packageName;
             if (!installedPackages.contains(dependencyName)) {
-                installedPackages.add(dependencyName);
-                
-                System.out.print(dependencyName + " " + Responses.SUCCESSFULLY_INSTALLED + " ");
+                installedPackages.add(dependencyName);                
+                result.concat(dependencyName + " " + Responses.SUCCESSFULLY_INSTALLED + " ");
             } else {
-                System.out.print(dependencyName + " " + Responses.ALREADY_INSTALLED + " ");
+                result.concat(dependencyName + " " + Responses.ALREADY_INSTALLED + " ");
             }   
 
-            installDependencies(dependency);
+            installDependencies(dependency, result);
         }
+        return result;
     }
 
-    public void removePackage(String packageName){
+    public String removePackage(String packageName){
 
+        String result = "";
         //Node exists in dependency tree - obtain dependencies
         Boolean dependencyIsNotUsed = true;
         if (dependenciesTree.getNode(packageName) != null) {
@@ -70,14 +73,15 @@ public class Inventory
         //Package was not found in dependencies tree therefore it doesn't have dependencies
         if (dependencyIsNotUsed) {
             if (!installedPackages.contains(packageName)) {  
-                System.out.println(packageName + " " + Responses.ALREADY_REMOVED);             
+                result.concat(packageName + " " + Responses.ALREADY_REMOVED);             
             } else {
                 installedPackages.remove(packageName);
-                System.out.println(packageName + " " + Responses.SUCCESSFULLY_REMOVED);             
+                result.concat(packageName + " " + Responses.SUCCESSFULLY_REMOVED);             
             }
         } else {
-            System.out.println(packageName + " " + Responses.IN_USE);             
+            result.concat(packageName + " " + Responses.IN_USE);             
         }
+        return result;
             
     }
 

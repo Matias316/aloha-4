@@ -14,7 +14,7 @@ public class Console {
         Scanner input = new Scanner(System.in);        
         while (true) {
             String inputCommand = input.nextLine();
-            brokerCommand.executeCommand(inputCommand);
+            System.out.println(brokerCommand.executeCommand(inputCommand));
             if (inputCommand.equals(SupportedCommands.END_COMMAND)) {
                 break;
             }        

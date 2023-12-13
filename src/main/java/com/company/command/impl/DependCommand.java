@@ -18,9 +18,9 @@ public class DependCommand implements Command {
     }
 
     @Override
-    public void execute() {
-        System.out.println(SupportedCommands.DEPEND_COMMAND + " " + this.packageName + " " + this.dependencies.toString());
+    public String execute() {        
         this.inventory.addDependencies(this.packageName, this.dependencies);
+        return SupportedCommands.DEPEND_COMMAND + " " + this.packageName + " " + this.dependencies.toString();
     }
     
 }

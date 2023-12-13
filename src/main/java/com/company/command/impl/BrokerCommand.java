@@ -20,8 +20,9 @@ public class BrokerCommand {
      * 
      * @param inputCommand: expected format <command> <arguments> 
      */
-    public void executeCommand(String inputCommand) {
+    public String executeCommand(String inputCommand) {
 
+        String result = "";
         List<String> inputCommandAndArgumentsList = new ArrayList<>(Arrays.asList(inputCommand.split(" ")));
         
         String command = inputCommandAndArgumentsList.get(0);
@@ -51,6 +52,8 @@ public class BrokerCommand {
         }
 
         //Ignore anything else different to the known commands
-        if (commandToExecute != null) commandToExecute.execute();
+        if (commandToExecute != null) result = commandToExecute.execute();
+        
+        return result;
     }
 }

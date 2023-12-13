@@ -17,8 +17,8 @@ public class ListCommand implements Command {
      * Returns: LIST <packageName1> <packageNameN>
     */
     @Override
-    public void execute() {
-        System.out.println(SupportedCommands.LIST_COMMAND + " " + this.inventory.listPackages().toString());
+    public String execute() {
+        return SupportedCommands.LIST_COMMAND + " " + this.inventory.listPackages().toString();
     }
     
 }
